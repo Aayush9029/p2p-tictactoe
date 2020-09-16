@@ -1,7 +1,7 @@
-## **p2p-tictactoe v1.1**
+## [**p2p-tictactoe v1.1**](https://aayush9029.github.io/p2p-tictactoe/)
 
 A tic tac toe game that can be played with friends all around the world.
-
+ [play here.](https://aayush9029.github.io/p2p-tictactoe/)
 ---
 
 ##  ![P2P version](https://img.shields.io/badge/Version-v1.1-skyblue?style=flat-square)  ![HTML](https://img.shields.io/badge/HTML-v5-brightred?style=flat-square) ![JS](https://img.shields.io/badge/JS-es6+-yellow?style=flat-square)
