@@ -7,13 +7,18 @@ let size = 150
 let turn = "X"
 let current_player = "O"
 
-
+let clicks = 0
 
 function setup(){
   let cnv = createCanvas(size*3, size*3)
   cnv.parent('sketch-holder');
 
+  makeBoxes()
 
+}
+
+
+function makeBoxes(){
   for (let i = 0; i < board.length; i++) {
     if (i <= 2){
       boxes.push(new Boxy(i * size, 0, size, size, i))
@@ -25,11 +30,22 @@ function setup(){
   }
 }
 
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
 function draw(){
   background(51)
   boxes.forEach(box=>{
     box.show()
   })
+  
+  if (clicks >= 9){
+    sleep(2500).then(() => {
+      boxes = []
+      makeBoxes()
+      clicks = 0
+    });
+  }
   
 }
 
@@ -42,9 +58,6 @@ class Boxy{
       this.h = h
       this.i = i
       this.clickedBy = null
-  }
-  update(){
-      
   }
   show(){
     fill(200, 229, 205)
@@ -62,9 +75,6 @@ class Boxy{
 
     }
   }
-  peer_picked(){
-    this.clickedBy = "1"
-  }
 }
 
 function mouseClicked(){
@@ -74,13 +84,15 @@ function mouseClicked(){
       if(mouseY > box.y && mouseY < box.y + box.h){
         if (box.clickedBy ==null){
           
-        box.clickedBy = current_player
-        SendMessage(box.i)
-        if(turn == "X"){
-          turn = "O"
-        }else{
-          turn = "X"
-        }
+          box.clickedBy = current_player
+          clicks+=1
+
+          SendMessage(box.i)
+          if(turn == "X"){
+            turn = "O"
+          }else{
+            turn = "X"
+          }
         }
         document.getElementById("turn").innerHTML="Player's turn: "+turn
         document.getElementById("which_player").innerHTML="You are: "+ current_player
@@ -89,7 +101,7 @@ function mouseClicked(){
     }
   })
 }
-  console.log("current Player : " + current_player)
-  console.log("Turn : " + turn)
+  // console.log("current Player : " + current_player)
+  // console.log("Turn : " + turn)
 
 }

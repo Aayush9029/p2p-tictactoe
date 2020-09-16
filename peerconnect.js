@@ -85,16 +85,16 @@ function ConnectToPeer(peerId_auto="") {
 }
 peer.on("connection", function (conn) {
 
-  console.log("peer connected");
-  console.log(conn.peer)
+  // console.log("peer connected");
+  // console.log(conn.peer)
   ConnectToPeer(peerId_auto=conn.peer)
 
 
   conn.on("open", function () {
-    console.log("conn open");
+    // console.log("conn open");
   });
   conn.on("data", function (data) {
-    console.log("recieved: "+data)
+    // console.log("recieved: "+data)
     
     if(turn != current_player){
       boxes.forEach(box =>{
@@ -102,14 +102,15 @@ peer.on("connection", function (conn) {
         if(box.i == data){
           if(box.clickedBy == null){
           box.clickedBy = turn
-          if(turn == "X"){
-            turn = "O"
+          clicks += 1
+            if(turn == "X"){
+              turn = "O"
+            }else{
+              turn = "X"
+            }
           }else{
-            turn = "X"
-          }
-          }else{
-            console.log("box already selected:")
-            console.log(box.clickedBy)
+            // console.log("box already selected:")
+            // console.log(box.clickedBy)
           }
         }
       })
@@ -130,7 +131,7 @@ function SendMessage(payload) {
     
   } else {
     if (!errorShown) {
-      console.log(payload)
+      // console.log(payload)
     }
   }
 }
@@ -158,7 +159,7 @@ function copyId() {
 
   setTimeout(function () {
     document.getElementById("notification").style.animation = "";
-    // console.log("ckear");
+    // // console.log("ckear");
   }, 3500);
 }
 
