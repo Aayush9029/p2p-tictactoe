@@ -9,7 +9,7 @@ A tic tac toe game that can be played with friends all around the world.
 ## How to play?
 1 . Host click on settings.</br>
 
- <img src="https://raw.githubusercontent.com/Aayush9029/p2p-tictactoe/master/readme-assets/goingtoconnect.png" width="512" >
+ <img src="https://raw.githubusercontent.com/Aayush9029/p2p-tictactoe/gh-pages/readme-assets/goingtoconnect.png" width="512" >
   
 2. Click Copy Game ID.</br>
 
@@ -17,19 +17,19 @@ A tic tac toe game that can be played with friends all around the world.
 
 5. 'Friend' Paste The Game Id and click connect!</br>
 
- <img src="https://raw.githubusercontent.com/Aayush9029/p2p-tictactoe/master/readme-assets/connecting.png" width="512" >
+ <img src="https://raw.githubusercontent.com/Aayush9029/p2p-tictactoe/gh-pages/readme-assets/connecting.png" width="512" >
  
 6. Wait for the message to pop up on both sides.
 
- <img src="https://raw.githubusercontent.com/Aayush9029/p2p-tictactoe/master/readme-assets/connected.png" width="512" >
+ <img src="https://raw.githubusercontent.com/Aayush9029/p2p-tictactoe/gh-pages/readme-assets/connected.png" width="512" >
  
 7. Click the cross button to close settings.
 
- <img src="https://raw.githubusercontent.com/Aayush9029/p2p-tictactoe/master/readme-assets/starttoplay.png" width="512" >
+ <img src="https://raw.githubusercontent.com/Aayush9029/p2p-tictactoe/gh-pages/readme-assets/starttoplay.png" width="512" >
  
 8. Enjoy.
 
- <img src="https://raw.githubusercontent.com/Aayush9029/p2p-tictactoe/master/readme-assets/playing.png" width="512" >
+ <img src="https://raw.githubusercontent.com/Aayush9029/p2p-tictactoe/gh-pages/readme-assets/playing.png" width="512" >
  
 ---
 `Made during quarantine with <3`
