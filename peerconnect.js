@@ -4,24 +4,27 @@ let peer_id_number;
 let isIdHidden = true;
 let connected = false;
 let errorShown = false;
+var getUserMedia =
+  navigator.getUserMedia ||
+  navigator.webkitGetUserMedia ||
+  navigator.mozGetUserMedia;
 
 peer.on("open", function (id) {
   peer_id_number = id;
   // console.log("My game ID is:" + id);
- if (isIdHidden){
-   document.getElementById("peerIdDisplay").innerHTML = "●●●●●●●●●●●";
-
- }else{
-  document.getElementById("peerIdDisplay").innerHTML = id;
-
- }
-
+  if (isIdHidden) {
+    document.getElementById("peerIdDisplay").innerHTML = "●●●●●●●●●●●";
+  } else {
+    document.getElementById("peerIdDisplay").innerHTML = id;
+  }
 });
 
-
-function ConnectToPeer(peerId_auto="") {
-  
-  if (document.getElementById("peerIdTxtBox").value.length > 4 && peerId_auto.length < 2 && !connected) {
+function ConnectToPeer(peerId_auto = "") {
+  if (
+    document.getElementById("peerIdTxtBox").value.length > 4 &&
+    peerId_auto.length < 2 &&
+    !connected
+  ) {
     connected = true;
 
     var peerId = document.getElementById("peerIdTxtBox").value;
@@ -32,7 +35,6 @@ function ConnectToPeer(peerId_auto="") {
     document.getElementById("error").innerHTML =
       "connecting to " + peerId + ".....";
 
-    
     peer.on("error", function (err) {
       error = true;
       // console.log(err);
@@ -44,17 +46,20 @@ function ConnectToPeer(peerId_auto="") {
       if (!error) {
         document.getElementById("error").innerHTML = "connected :)";
         connected = true;
-        document.getElementById("peer_id").innerHTML = "<span class='dot'></span> Connected to: "+peerId.slice(0, 5) + "..."
+        document.getElementById("peer_id").innerHTML =
+          "<span class='dot'></span> Connected to: " +
+          peerId.slice(0, 5) +
+          "...";
       }
     }, 5300);
 
     setTimeout(function () {
       document.getElementById("error").style.display = "none";
     }, 10000);
-  }else if(peerId_auto.length > 2  && !connected){
+  } else if (peerId_auto.length > 2 && !connected) {
     connected = true;
 
-    peerId = peerId_auto
+    peerId = peerId_auto;
     let error = false;
     // console.log(peerId);
     conn = peer.connect(peerId);
@@ -62,7 +67,6 @@ function ConnectToPeer(peerId_auto="") {
     document.getElementById("error").innerHTML =
       "connecting to " + peerId + ".....";
 
-    
     peer.on("error", function (err) {
       error = true;
       // console.log(err);
@@ -73,62 +77,103 @@ function ConnectToPeer(peerId_auto="") {
     setTimeout(function () {
       if (!error) {
         document.getElementById("error").innerHTML = "connected :)";
-        document.getElementById("peer_id").innerHTML = "<span class='dot'></span> Connected to: "+peerId.slice(0, 5) + "..."
+        document.getElementById("peer_id").innerHTML =
+          "<span class='dot'></span> Connected to: " +
+          peerId.slice(0, 5) +
+          "...";
       }
     }, 5300);
 
     setTimeout(function () {
       document.getElementById("error").style.display = "none";
     }, 10000);
-   
   }
 }
-peer.on("connection", function (conn) {
 
+function call() {
+  console.log("Calling");
+
+  getUserMedia(
+    { audio: true, video: { width: 320, height: 240 } },
+    function (stream) {
+      var call = peer.call(conn.peer, stream);
+      call.on("stream", function (remoteStream) {});
+    },
+    function (err) {
+      console.log("Failed to get local stream", err);
+    }
+  );
+}
+
+peer.on("call", function (call) {
+  console.log("Call Incoming");
+
+  alert("Video call incoming, run now! ");
+
+  var getUserMedia =
+    navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia;
+
+  if (getUserMedia) {
+    getUserMedia(
+      { audio: true, video: { width: 320, height: 240 } },
+      function (stream) {
+        var video = document.querySelector("video");
+        video.srcObject = stream;
+        video.onloadedmetadata = function (e) {
+          video.play();
+        };
+      },
+      function (err) {
+        console.log("The following error occurred: " + err.name);
+      }
+    );
+  } else {
+    console.log("getUserMedia not supported");
+  }
+});
+
+peer.on("connection", function (conn) {
   // console.log("peer connected");
   // console.log(conn.peer)
-  ConnectToPeer(peerId_auto=conn.peer)
-
+  ConnectToPeer((peerId_auto = conn.peer));
 
   conn.on("open", function () {
     // console.log("conn open");
   });
   conn.on("data", function (data) {
     // console.log("recieved: "+data)
-    
-    if(turn != current_player){
-      boxes.forEach(box =>{
 
-        if(box.i == data){
-          if(box.clickedBy == null){
-          box.clickedBy = turn
-          clicks += 1
-            if(turn == "X"){
-              turn = "O"
-            }else{
-              turn = "X"
+    if (turn != current_player) {
+      boxes.forEach((box) => {
+        if (box.i == data) {
+          if (box.clickedBy == null) {
+            box.clickedBy = turn;
+            clicks += 1;
+            if (turn == "X") {
+              turn = "O";
+            } else {
+              turn = "X";
             }
-          }else{
+          } else {
             // console.log("box already selected:")
             // console.log(box.clickedBy)
           }
         }
-      })
-      
+      });
 
-        document.getElementById("turn").innerHTML="Player's turn: "+turn
-        document.getElementById("which_player").innerHTML="You are: "+current_player
-      
+      document.getElementById("turn").innerHTML = "Player's turn: " + turn;
+      document.getElementById("which_player").innerHTML =
+        "You are: " + current_player;
     }
-  })
+  });
 });
 
 function SendMessage(payload) {
   if (connected) {
-    
-      conn.send(payload);
-      print("sending" + payload)
-    
+    conn.send(payload);
+    print("sending" + payload);
   } else {
     if (!errorShown) {
       // console.log(payload)
@@ -163,7 +208,4 @@ function copyId() {
   }, 3500);
 }
 
-
-
-function sharePlayerInfo(){
-}
+function sharePlayerInfo() {}

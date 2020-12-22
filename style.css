@@ -4,8 +4,18 @@
   border-style: none;
 }
 ::selection {
-  background: black;
-  color: white;
+  background: none;
+  color: none;
+}
+
+video {
+  background: grey;
+  border-radius: 3px;
+  box-shadow: 3px 3px 16px rgba(0, 0, 0, 0.25),
+    -3px -3px 16px rgb(121, 206, 183);
+  display: none;
+  margin: 20px auto;
+  transition: 0.3s ease-in;
 }
 
 body {
@@ -32,30 +42,36 @@ button:active {
     inset -3px -3px 9px rgb(179, 42, 0);
 }
 
-canvas{
-  padding:5px;
+canvas {
+  padding: 5px;
   display: block;
-  margin: auto auto ;
-  box-shadow: 3px 3px  10px rgba(0, 26, 83, 0.5);
+  margin: auto auto;
+  box-shadow: 3px 3px 10px rgba(0, 26, 83, 0.5);
   background: rgb(255, 255, 255);
-  transition: 0.3s
-
+  transition: 0.3s;
 }
 
-canvas:hover{
-  box-shadow: 3px 3px  15px rgba(0, 26, 83, 0.5);
+canvas:hover {
+  box-shadow: 3px 3px 15px rgba(0, 26, 83, 0.5);
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
-
 }
 
-#peer_id, #which_player, #turn{
+#peer_id,
+#which_player,
+#toggle_video,
+#turn {
   background: #ececec;
   padding: 10px;
-  margin-bottom: 15px;
-  box-shadow: 3px 3px  15px rgba(0, 26, 83, 0.25);
+  /* margin-bottom: 15px; */
+  box-shadow: 3px 3px 15px rgba(0, 26, 83, 0.25);
+  width: 500px;
 
+  margin: 10px auto;
 }
 
+#toggle_video {
+  margin: 25px auto;
+}
 #peerIdTxtBox {
   background: #02735e;
   color: #ffffff;
@@ -128,20 +144,12 @@ canvas:hover{
   cursor: pointer;
 }
 
-
 .dot {
   height: 13px;
   width: 13px;
   background-color: rgb(86, 214, 135);
   border-radius: 50%;
   display: inline-block;
-}
-
-
-.Info{
-  padding: 20px;
-  width: 500px;
-  margin: 10px auto ;
 }
 
 #Show_settings {
@@ -164,7 +172,6 @@ canvas:hover{
   box-shadow: 2px 2px 5px rgba(0, 26, 83, 0.2);
   opacity: 0;
 }
-
 
 @-webkit-keyframes nanimation {
   0% {
@@ -221,4 +228,64 @@ canvas:hover{
     opacity: 0;
     left: -500px;
   }
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 15px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #9cb5ba;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  left: 3px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #00ad00;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #00ad00;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

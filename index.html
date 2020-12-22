@@ -13,7 +13,11 @@
         <div id="notification"></div>
 
         <div class="holder-top">
-
+        <button
+        id="show_call_button" OnClick="call();document.getElementById('call_wrapper').style.display='block';document.getElementById('show_call_button').style.display='none'">
+        Talk with opponent
+        </button>
+    
         <button
           id="Show_settings"
           OnClick="document.getElementById('settings_wrapper').style.display='block';document.getElementById('Show_settings').style.display='none'"
@@ -58,11 +62,20 @@
           <div id="turn">Player's turn: X</div>
         </div>
           
-
+      <div id="toggle_video">
+          Video Chat 
+           <label class="switch">
+          <input type="checkbox" onchange="show_hide_vid()">
+          <span class="slider round"></span>
+        </label>
+      </div>
         </div>
+        
+        <video id="video"></video>
+        
+
+        
       <div id="sketch-holder">
-
-
 
 <!-- <footer>
   <button OnClick="">
