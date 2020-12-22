@@ -38,7 +38,7 @@ A tic tac toe game that can be played with friends all around the world.
 ---
 To-do:
   - winner validation
-  - in-game chat feature 
+  - ~~in-game chat feature~~ 
   - min-max algorithm adaptation
   
  
