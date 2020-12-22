@@ -1,6 +1,7 @@
 ## [**p2p-tictactoe v1.1**](https://aayush9029.github.io/p2p-tictactoe/)
 
 A tic tac toe game that can be played with friends all around the world.
+*NOW THERE'S VIDEO CALLING FEATURE YAY*
  [play here.](https://aayush9029.github.io/p2p-tictactoe/)
 ---
 
